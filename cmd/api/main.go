@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	"golang-CRUD-products-API/database"
-	models "golang-CRUD-products-API/internal"
+
+	models "github.com/diego-all/products-API/internal"
+
+	"github.com/diego-all/products-API/database"
 
 	"log"
 	"net/http"

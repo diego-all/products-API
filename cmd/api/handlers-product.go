@@ -1,10 +1,11 @@
 package main
 
 import (
-	models "golang-CRUD-products-API/internal"
 	"net/http"
 	"strconv"
 	"time"
+
+	models "github.com/diego-all/products-API/internal"
 
 	"github.com/go-chi/chi"
 )

@@ -1,4 +1,4 @@
-module golang-CRUD-products-API
+module github.com/diego-all/products-API
 
 go 1.22.1
 
