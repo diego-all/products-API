@@ -69,6 +69,7 @@ func (app *application) serve() error {
 			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
 			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
 			tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,
+			tls.TLS_RSA_WITH_AES_256_GCM_SHA384, // Evitar RSA si es posible, pero se incluye por compatibilidad
 		},
 		PreferServerCipherSuites: true, // El servidor elige la ciphersuite
 	}
