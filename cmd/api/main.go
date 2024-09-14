@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 
 	models "github.com/diego-all/products-API/internal"
@@ -62,9 +63,20 @@ func main() {
 func (app *application) serve() error {
 	app.infoLog.Println("API listening on port", app.config.port)
 
+	tlsConfig := &tls.Config{
+		// Lista de ciphersuites permitidas
+		CipherSuites: []uint16{
+			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+			tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,
+		},
+		PreferServerCipherSuites: true, // El servidor elige la ciphersuite
+	}
+
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%d", app.config.port),
-		Handler: app.routes(),
+		Addr:      fmt.Sprintf(":%d", app.config.port),
+		Handler:   app.routes(),
+		TLSConfig: tlsConfig,
 	}
 	//return srv.ListenAndServe()
 	return srv.ListenAndServeTLS(app.config.certPath, app.config.keyPath)

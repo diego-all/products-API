@@ -35,6 +35,10 @@ func (app *application) CreateProduct(w http.ResponseWriter, r *http.Request) {
 		_ = app.writeJSON(w, http.StatusBadRequest, payload)
 	}
 
+	// Obtener el User-Agent
+	userAgent := r.Header.Get("User-Agent")
+	app.infoLog.Printf("User-Agent: %s", userAgent)
+
 	var product = models.Product{
 		Name:        productReq.Name,
 		Description: productReq.Description,
@@ -132,6 +136,11 @@ func (app *application) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) AllProducts(w http.ResponseWriter, r *http.Request) {
+
+	// Obtener el User-Agent
+	userAgent := r.Header.Get("User-Agent")
+	app.infoLog.Printf("User-Agent: %s", userAgent)
+
 	var products models.Product
 	all, err := products.GetAll()
 	if err != nil {

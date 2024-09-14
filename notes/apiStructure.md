@@ -1,5 +1,8 @@
     
-    
+
+
+
+    curl --key client.key --cert client.pem -k https://localhost:9090/health (Funciona)
     
     
     
@@ -10,4 +13,4 @@
     curl --proxytunnel
 
 
-curl -A 'Mozilla/3.0 (Win95; I)' --key client.key --cert client.pem -k https://localhost:9090/health
+    curl -A 'Mozilla/3.0 (Win95; I)' --key client.key --cert client.pem -k https://localhost:9090/health
