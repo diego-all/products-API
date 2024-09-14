@@ -13,7 +13,9 @@ import (
 )
 
 type config struct {
-	port int
+	port     int
+	certPath string
+	keyPath  string
 }
 
 type application struct {
@@ -31,6 +33,9 @@ func main() {
 
 	var cfg config
 	cfg.port = 9090
+
+	cfg.certPath = "/home/diegoall/MAESTRIA_ING/domain-model/products-API/cmd/api/server.pem"
+	cfg.keyPath = "/home/diegoall/MAESTRIA_ING/domain-model/products-API/cmd/api/server.key"
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
@@ -61,5 +66,6 @@ func (app *application) serve() error {
 		Addr:    fmt.Sprintf(":%d", app.config.port),
 		Handler: app.routes(),
 	}
-	return srv.ListenAndServe()
+	//return srv.ListenAndServe()
+	return srv.ListenAndServeTLS(app.config.certPath, app.config.keyPath)
 }
